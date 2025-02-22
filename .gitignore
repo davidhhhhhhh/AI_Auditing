@@ -4,3 +4,5 @@
 # ignore pycharm setting
 .idea
 
+# ignore api key
+OpenAI_ME/config.json
