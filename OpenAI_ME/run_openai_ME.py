@@ -19,7 +19,7 @@ API Key
 with open("config.json", "r") as config_file:
     config = json.load(config_file)
 
-KEY = config["OPAI_API_KEY"]
+KEY = config["API_KEY_2"]
 
 client = OpenAI(
     api_key=KEY
@@ -94,7 +94,7 @@ def format_floats(data):
 
 def me_caller_simple(input_text, sleep_time=0.5, retry=5):
     try:
-        api_response = client.moderations.create(input=input_text)
+        api_response = client.moderations.create(model="omni-moderation-latest", input=input_text)
         response_dict = api_response.model_dump()
         formatted_dict = process(response_dict)
     except Exception as e:
@@ -111,23 +111,28 @@ Input: df: a dataframe containing text to send into the ME, col: the column to q
 """
 
 
-def run_me_caller(df, col):
+from tqdm import tqdm
+from datetime import date
+
+def run_me_caller(df, col, start_index=0):
+    """Calls OpenAI moderation API on a DataFrame column, tracking correct row indices."""
     response_list = []
     repeats = 1
 
     try:
-        for i in tqdm(range(0, len(df[col]))):
-            if df[col][i] != "":
-                # response_list.append(me_caller(df[col][i], repeats))
-                response_list.append(me_caller_simple(df[col][i]))
+        for i in tqdm(range(len(df))):  # Iterate over batch indices, not full dataset
+            if df.iloc[i][col] != "":
+                response = me_caller_simple(df.iloc[i][col])  # API call
+                response_list.append(response)
+                print(response)
             else:
                 response_list.append("NoInput")
-            print(str(i + 1), end=" ")
+            print(f"Processed row {start_index + i + 1}")  # Track the full dataset index
 
     except TypeError as te:
-        print("TypeError: " + str(te))
-    pass
-    model = 'text-moderation-007'  # update this if model changes
+        print(f"TypeError: {te}")
+
+    model = "omni-moderation-latest"  # Update this if model changes
     return response_list, [(date.today(), model)] * len(response_list)
 
 

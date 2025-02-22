@@ -11,12 +11,12 @@ def conv_openAI_ME_data(ME_responses):
 
 # File paths
 input_file = "/Users/daviddai/PycharmProjects/AI_Auditing/RawData/movie_TV_raw_data.csv"
-output_file = "/Users/daviddai/PycharmProjects/AI_Auditing/OpenAI_ME/movie_TV_ME_Feb.csv"
+output_file = "/Users/daviddai/PycharmProjects/AI_Auditing/OpenAI_ME/movieTV_25-02-22_OpenAI_omni-moderation-2024-09-26.csv"
 
 # Read the dataset
 dataset = pd.read_csv(input_file)
 total_rows = dataset.shape[0]
-batch_size = 2000
+batch_size = 200
 
 print(f"Total rows: {total_rows}")
 print("Starting ME API calls...")
@@ -34,13 +34,13 @@ start_time = time.time()
 
 # Process the dataset in batches
 for i in range(start_index, total_rows, batch_size):
-    end_index = min(i + batch_size, total_rows)  # Ensure we don't go beyond the last row
+    end_index = min(i + batch_size, total_rows)  # Ensure we don't exceed dataset length
     batch = dataset.iloc[i:end_index].copy()  # Copy to avoid SettingWithCopyWarning
 
     print(f"Processing rows {i} to {end_index - 1}...")
 
-    # OpenAI API call
-    OpenAI_ME_responses = run_me_caller(batch, "content")
+    # OpenAI API call (pass correct start_index)
+    OpenAI_ME_responses = run_me_caller(batch, "content", i)
 
     # Add responses to DataFrame
     batch["OpenAI_ME_responses"] = OpenAI_ME_responses[0]
