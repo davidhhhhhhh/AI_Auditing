@@ -6,3 +6,7 @@
 
 # ignore api key
 OpenAI_ME/config.json
+
+#cached py
+__pycache__/
+*.pyc
