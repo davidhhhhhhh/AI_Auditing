@@ -16,7 +16,7 @@ from tqdm import tqdm
 """
 API Key
 """
-with open("config.json", "r") as config_file:
+with open("OpenAI_ME/config.json", "r") as config_file:
     config = json.load(config_file)
 
 KEY = config["API_KEY_2"]

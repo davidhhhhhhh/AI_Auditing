@@ -20,8 +20,8 @@ def conv_openAI_ME_data(ME_responses):
 
 
 # File paths
-input_file = "/Users/daviddai/PycharmProjects/AI_Auditing/RawData/movie_TV_raw_data.csv"
-output_file = "/Users/daviddai/PycharmProjects/AI_Auditing/OpenAI_ME/movieTV_25-02-22_OpenAI_omni-moderation-2024-09-26.csv"
+input_file = "RawData/movie_TV_raw_data.csv"
+output_file = "OpenAI_ME/movieTV_25-02-22_OpenAI_omni-moderation-2024-09-26.csv"
 
 # Read the dataset
 dataset = pd.read_csv(input_file)
