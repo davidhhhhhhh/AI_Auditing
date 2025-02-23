@@ -10,3 +10,7 @@ OpenAI_ME/config.json
 #cached py
 __pycache__/
 *.pyc
+
+# file run on windows to run
+OpenAI_ME/win1.py
+OpenAI_ME/winUtil.py
