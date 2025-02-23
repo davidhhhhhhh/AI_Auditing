@@ -127,7 +127,7 @@ def run_me_caller(df, col, start_index=0):
                 print(response)
             else:
                 response_list.append("NoInput")
-            print(f"Processed row {start_index + i + 1}")  # Track the full dataset index
+            # print(f"Processed row {start_index + i + 1}")  # Track the full dataset index
 
     except TypeError as te:
         print(f"TypeError: {te}")
