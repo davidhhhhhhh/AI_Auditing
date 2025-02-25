@@ -14,3 +14,8 @@ __pycache__/
 # file run on windows to run
 OpenAI_ME/win1.py
 OpenAI_ME/winUtil.py
+
+# Cursor specific
+.cursorignore
+.cursor/
+.cursor-cache/

@@ -1,0 +1,46 @@
+# File patterns to include/exclude
+include:
+  - "*.py"
+  - "*.json"
+  - "*.yaml"
+  - "*.yml"
+exclude:
+  - "node_modules/*"
+  - ".venv/*"
+  - "__pycache__/*"
+  - "*.pyc"
+
+# Naming conventions
+naming_conventions:
+  - style: "snake_case"
+    patterns:
+      - variables: "^[a-z][a-z0-9_]*$"
+      - functions: "^[a-z][a-z0-9_]*$"
+      - classes: "^[A-Z][a-zA-Z0-9]*$"  # PascalCase for classes
+      - constants: "^[A-Z][A-Z0-9_]*$"
+      - modules: "^[a-z][a-z0-9_]*$"
+      - packages: "^[a-z][a-z0-9_]*$"
+
+# Python-specific rules
+python:
+  max_line_length: 88  # Black formatter default
+  indentation: 4
+  docstring_style: "google"
+  type_hints: true
+  import_order:
+    - standard_library
+    - third_party
+    - local
+
+# Other rules remain the same as before...
+rules:
+  - name: "Requirement Confirmation"
+    description: "AI must repeat user requirements before changes"
+    pattern: "requirement_confirmation"
+    action: "repeat"
+
+output:
+  - show_diffs: true
+  - minimal_context: true
+  - include_explanations: true
+  - mark_unchanged_code: "// ... existing code ..." 
